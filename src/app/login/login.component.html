@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" class="form-control" name="email" id="email" formControlName="email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="pass" id="pass" formControlName="password" />
+    </div>
+    <div class="form-group">
+        <label for="passConfirm">Confirm password:</label>
+        <input type="password" class="form-control" name="passConfirm" id="passConfirm" formControlName="passConfirm" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+        <small class="form-text text-muted" *ngIf="loginForm.get('email').invalid || loginForm.get('password').invalid">
+            Username or password is incorrect.
+          </small>
+</form>
