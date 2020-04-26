@@ -13,7 +13,8 @@ export class NewsComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.data = this.route.snapshot.data;
+    this.data = this.route.snapshot.data.data;
+    // this.data = this.route.snapshot
     console.log(this.data);
   }
 
