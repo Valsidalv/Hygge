@@ -9,6 +9,7 @@ import { CustomValidators } from '../custom-validator';
 import { AuthGuardService } from '../auth-guard.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,13 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginForm2: FormGroup;
+  // loginForm2: FormGroup;
   submitted = false;
   
   invalidCredentialMsg: string;
   username:string;
   password:string;
-  retUrl:string="login";
+  retUrl:string="profile";
 
   ngOnInit() {
     this.activatedRoute.queryParamMap
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
         });
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthGuardService, 
+  constructor(private fb: FormBuilder, private authService: AuthService, 
     private router: Router, 
     private activatedRoute:ActivatedRoute) {
     this.loginForm = this.createSignupForm();

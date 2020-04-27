@@ -17,8 +17,12 @@
           </small>
 </form>
 
-<form #loginForm2="ngForm" (ngSubmit)="onFormSubmit(loginForm2)">
-    <p>User Name: <input type='text'  name='username' ngModel></p>
-    <p>Password: <input type="password"  name="password" ngModel></p>
-    <p><button type="submit">Submit</button></p> 
+<form #loginForm2="ngForm" (ngSubmit)="onFormSubmit(loginForm2)" class="mt-4">
+    <div class="form-group">
+        User Name: <input type='text' class="form-control" name='username' ngModel>
+    </div>
+    <div class="grom-group">
+        Password: <input type="password" class="form-control" name="password" ngModel>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>

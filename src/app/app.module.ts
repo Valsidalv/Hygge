@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NewsComponent } from './news/news.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Resolver } from './route.resolver';
 import { ResolveService } from './resolve.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
 
 
 const ROUTES: Routes = [
@@ -31,9 +32,10 @@ const ROUTES: Routes = [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [Resolver, ResolveService],
+  providers: [Resolver, ResolveService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
