@@ -14,7 +14,6 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.route.snapshot.data.data;
-    // this.data = this.route.snapshot
     console.log(this.data);
   }
 

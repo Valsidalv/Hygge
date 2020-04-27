@@ -18,25 +18,26 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  // loginForm2: FormGroup;
   submitted = false;
-  
+
   invalidCredentialMsg: string;
-  username:string;
-  password:string;
-  retUrl:string="profile";
+  username: string;
+  password: string;
+  retUrl: string = 'login';
 
   ngOnInit() {
-    this.activatedRoute.queryParamMap
-                .subscribe(params => {
-            this.retUrl = params.get('retUrl'); 
-            console.log( 'LoginComponent/ngOnInit '+ this.retUrl);
-        });
+    this.activatedRoute.queryParamMap.subscribe((params) => {
+      this.retUrl = params.get('retUrl');
+      console.log('LoginComponent/ngOnInit ' + this.retUrl);
+    });
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthService, 
-    private router: Router, 
-    private activatedRoute:ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.loginForm = this.createSignupForm();
   }
 
@@ -58,7 +59,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    
     this.submitted = true;
 
     // stop here if form is invalid
@@ -70,14 +70,17 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
   }
 
+
   onFormSubmit(loginForm2) {
-    this.authService.login(loginForm2.value.username, loginForm2.value.password).subscribe(data => {
-        console.log( 'return to '+ this.retUrl);
-        if (this.retUrl!=null) {
-             this.router.navigate( [this.retUrl]);
+    this.authService
+      .login(loginForm2.value.username, loginForm2.value.password)
+      .subscribe((data) => {
+        if (data) {
+          this.router.navigate(['/profile']);
         } else {
-             this.router.navigate( ['login']);
+          this.router.navigate(['login']);
         }
-    });
- }
+      });
+  }
+  
 }

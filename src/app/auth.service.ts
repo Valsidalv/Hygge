@@ -34,5 +34,7 @@ export class AuthService {
 
   logoutUser(): void {
     this.isloggedIn = false;
+    console.log('izlogovan');
   }
+
 }
