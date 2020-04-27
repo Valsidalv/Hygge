@@ -16,3 +16,9 @@
             Username or password is incorrect.
           </small>
 </form>
+
+<form #loginForm2="ngForm" (ngSubmit)="onFormSubmit(loginForm2)">
+    <p>User Name: <input type='text'  name='username' ngModel></p>
+    <p>Password: <input type="password"  name="password" ngModel></p>
+    <p><button type="submit">Submit</button></p> 
+  </form>

@@ -10,13 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Resolver } from './route.resolver';
 import { ResolveService } from './resolve.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuardService } from './auth-guard.service';
 
 
 const ROUTES: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'news', component: NewsComponent, resolve: { data: Resolver }},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

@@ -6,6 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { CustomValidators } from '../custom-validator';
+import { AuthGuardService } from '../auth-guard.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +17,25 @@ import { CustomValidators } from '../custom-validator';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  loginForm2: FormGroup;
   submitted = false;
   
-  ngOnInit() {}
+  invalidCredentialMsg: string;
+  username:string;
+  password:string;
+  retUrl:string="login";
 
-  constructor(private fb: FormBuilder) {
+  ngOnInit() {
+    this.activatedRoute.queryParamMap
+                .subscribe(params => {
+            this.retUrl = params.get('retUrl'); 
+            console.log( 'LoginComponent/ngOnInit '+ this.retUrl);
+        });
+  }
+
+  constructor(private fb: FormBuilder, private authService: AuthGuardService, 
+    private router: Router, 
+    private activatedRoute:ActivatedRoute) {
     this.loginForm = this.createSignupForm();
   }
 
@@ -51,4 +68,15 @@ export class LoginComponent implements OnInit {
 
     console.log(this.loginForm.value);
   }
+
+  onFormSubmit(loginForm2) {
+    this.authService.login(loginForm2.value.username, loginForm2.value.password).subscribe(data => {
+        console.log( 'return to '+ this.retUrl);
+        if (this.retUrl!=null) {
+             this.router.navigate( [this.retUrl]);
+        } else {
+             this.router.navigate( ['login']);
+        }
+    });
+ }
 }
